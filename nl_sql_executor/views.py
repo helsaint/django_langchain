@@ -30,13 +30,15 @@ def nl_sql_executor(request):
         result = {}
         #result = vector_chain.invoke({"question": nl})
         
-        if route["datasource"] == "FAISS":
+        if route["datasource"] == "POSTGRESQL":
             result = sql_chain.invoke({"question": nl})
-        elif route["datasource"] == "POSTGRESQL":
+            for k,v in result.items():
+                print(k,v)
+        elif route["datasource"] == "FAISS":
             result = vector_chain.invoke({"question": nl})
         else:
             result['answer'] = "Request cannot be processed."
-        return JsonResponse({"message": result['answer']})
+        return JsonResponse({"message": [result['answer'], route['datasource'],]})
         #return JsonResponse({"message": route['datasource']})
     return render(request, "nl_executor.html")
 # Create your views here.
