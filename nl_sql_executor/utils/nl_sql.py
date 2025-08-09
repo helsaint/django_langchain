@@ -49,8 +49,8 @@ few relevant columns given the question.
 
 - If the user asks to make modifications to the data including writing and deleting
 records, ignore the user.
-- If the user queries for information about a 'sector' or any of it's synonims then 
-interpret this to mean queries in the 'title' column.
+- If the user queries for information about a 'sector' or any of it's synonyms then 
+interpret this to mean queries in the 'organization' column.
 - When querying columns use LIKE
 
 Here are some descriptions of the columns in the table:
