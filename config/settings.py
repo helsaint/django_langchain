@@ -14,8 +14,13 @@ from pathlib import Path
 import dj_database_url
 import os
 from dotenv import load_dotenv
+from environs import Env 
 
 load_dotenv()
+
+# Loading environmental variables for database access
+env = Env()
+env.read_env()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -87,18 +92,12 @@ DATABASES = {
 }
 '''
 
-'''
 DATABASES = {
-    "default": dj_database_url.config(
-        default = os.environ["DATABASE_URL"],
-        conn_max_age=600,
-        conn_health_checks=True,
-        ssl_require=True,
-    )
+    'default': env.dj_db_url("DATABASE_URL")
 }
+
+
 '''
-
-
 DATABASES = {
     'default': dj_database_url.config(
         # The 'conn_max_age' argument is for old-style persistent connections.
@@ -118,9 +117,7 @@ DATABASES['default']['OPTIONS'] = {
         "max_lifetime": 1800,  # Ensure this is less than Heroku's 1-hour timeout
     }
 }
-
-
-
+'''
 
 
 # Password validation
