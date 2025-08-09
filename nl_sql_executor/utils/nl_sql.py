@@ -49,17 +49,20 @@ few relevant columns given the question.
 
 - If the user asks to make modifications to the data including writing and deleting
 records, ignore the user.
-- When querying columns use ILIKE
+- If the user queries for information about a 'sector' or any of it's synonims then 
+interpret this to mean queries in the 'title' column.
+- When querying columns use LIKE
 
 Here are some descriptions of the columns in the table:
 - All headers in the table are in lower case
+- All text entries are also in lower case
 - programme - this represents the type of work being engaged in example administrative, advisory,
-planning, compliance, policy, development etc. The text is in Title Case.
-title - this gives the official programme name that the expenditure is being used for. The text is in Title Case.
+planning, compliance, policy, development etc.
+- title - this gives the official programme name that the expenditure is being used for.
 - organization - this represents all the ministries, office of the president and prime minister,
-Guyana Defense Force, various commissions and agencies such as Supreme Court, Regional Councils etc. The text is in Title Case.
+Guyana Defense Force, various commissions and agencies such as Supreme Court, Regional Councils etc.
 - org_type - this tells if the organization is a ministry, a commission, a local government organ, public debt etc.
-can be used to seperate expenditures. The text is in Title Case.
+can be used to seperate expenditures.
 - description - this gives a brief description of what kind of work is being carried out, example upgrading facilities,
 pension payments, employment costs, benefits costs etc.
 - cost - this is the total amount that will be spent on the project
@@ -71,10 +74,10 @@ grants as well as loans.
 - actual_2024 - amount spent in 2024
 - actual_2025 - amount spent so far in 2025. This is not the same as the budgeted amount for 2025
 - budget_2025 - this is the amount of money budgeted for the year 2025
-- expenditure_type_2 - Can be capital, appropriated current expenditure or statutory current expenditure. The text is in Title Case.
+- expenditure_type_2 - Can be capital, appropriated current expenditure or statutory current expenditure.
 - expenditure_type_3 - Capital and Statutory remain the same. Appropriated expenditure is subdivided into 
-salaries, material and equipment, maintenance, rentals, pensions, taxes etc. The text is in Title Case.
-- expenditure_type - is divided into Capital and Current. The text is in Title Case.
+salaries, material and equipment, maintenance, rentals, pensions, taxes etc.
+- expenditure_type - is divided into Capital and Current.
 
 Pay attention to use only the column names that you can see in the schema
 description. Be careful to not query for columns that do not exist. Also,
