@@ -8,9 +8,12 @@ import os
 from dotenv import load_dotenv
 from typing_extensions import TypedDict
 from typing_extensions import Annotated
+from environs import Env
 
 load_dotenv()
-
+env = Env()
+env.read_env()
+print(env.str("SQL_TABLE"))
 class State(TypedDict):
     question:str
     query:str
@@ -24,7 +27,8 @@ class QueryOutput(TypedDict):
 
 db = SQLDatabase.from_uri(
         os.environ["DATABASE_URL"],
-        include_tables=['budget_guyana'],  # Restrict accessible tables
+        #env.dj_db_url("DATABASE_URL"),
+        include_tables=[os.environ["SQL_TABLE"]],  # Restrict accessible tables
         sample_rows_in_table_info=1
 )
 

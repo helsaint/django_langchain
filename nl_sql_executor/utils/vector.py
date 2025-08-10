@@ -7,8 +7,11 @@ from langchain_core.documents import Document
 from typing_extensions import List, TypedDict
 from langgraph.graph import START, StateGraph
 from dotenv import load_dotenv
+from environs import Env
 
 load_dotenv()
+env = Env()
+env.read_env()
 
 class State(TypedDict):
     question: str
@@ -36,6 +39,7 @@ vector_store = PGVector(
     embeddings=embeddings,
     collection_name=os.environ["DB_COLLECTION_NAME"],
     connection=os.environ["DATABASE_URL"],
+    #connection=env.dj_db_url("DATABASE_URL"),
     use_jsonb=True,
 )
 
