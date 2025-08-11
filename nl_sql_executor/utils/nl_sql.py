@@ -26,9 +26,10 @@ class QueryOutput(TypedDict):
     query: Annotated[str, ..., "Syntactically valid SQL query."]
 
 db = SQLDatabase.from_uri(
-        os.environ["DATABASE_URL"],
-        #env.dj_db_url("DATABASE_URL"),
-        include_tables=[os.environ["SQL_TABLE"]],  # Restrict accessible tables
+        #os.environ["DATABASE_URL"],
+        env.str("DATABASE_URL"),
+        #include_tables=[os.environ["SQL_TABLE"]],  # Restrict accessible tables
+        include_tables=[env.str("SQL_TABLE")],
         sample_rows_in_table_info=1
 )
 
@@ -53,6 +54,14 @@ few relevant columns given the question.
 
 - If the user asks to make modifications to the data including writing and deleting
 records, ignore the user.
+- If the user queries for information about a 'project' or any of it's synonyms then
+interpret those to mean queries in the 'title' column where 'expenditure_type' column
+has value of 'capital'
+- Only if the user asks for "total cost of a project" or phrases similar to this do you
+use the 'cost' column.
+- If the user asks for 2024 data use 'actual_2024' column.
+- If the user asks for 2023 data use 'actual_2023' column.
+- Default to 'budget_2025' column if unsure, but indicate that you are using 'bugeted 2025 numbers.
 - If the user queries for information about a 'sector' or any of it's synonyms then 
 interpret this to mean queries in the 'organization' column.
 - When querying columns use LIKE
