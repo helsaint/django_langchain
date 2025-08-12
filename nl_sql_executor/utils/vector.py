@@ -37,9 +37,10 @@ embeddings = HuggingFaceEmbeddings(
 
 vector_store = PGVector(
     embeddings=embeddings,
-    collection_name=os.environ["DB_COLLECTION_NAME"],
-    connection=os.environ["DATABASE_URL"],
-    #connection=env.dj_db_url("DATABASE_URL"),
+    collection_name=env.str("DB_COLLECTION_NAME"),
+    #collection_name=os.environ["DB_COLLECTION_NAME"],
+    #connection=os.environ["DATABASE_URL"],
+    connection=env.str("DATABASE_URL"),
     use_jsonb=True,
 )
 
