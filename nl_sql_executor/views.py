@@ -6,19 +6,6 @@ from .utils.nl_sql import sql_chain
 from .utils.vector import vector_chain
 from .utils.query_routing import router
 
-'''
-def nl_sql_executor(request):
-    #graph = create_sql_chain()
-    #graph = vector_chain()
-    if request.method == "POST":
-        nl = request.POST.get("nl", "")
-        nl = nl.lower()
-        route = router.invoke({"question": nl})
-        result = vector_chain.invoke({"question": nl})
-        return JsonResponse({"message": result['answer']})
-    return render(request, "nl_executor.html")
-
-'''
 
 def nl_sql_executor(request):
     #graph = create_sql_chain()
@@ -32,8 +19,10 @@ def nl_sql_executor(request):
         
         if route["datasource"] == "POSTGRESQL":
             result = sql_chain.invoke({"question": nl})
+            '''
             for k,v in result.items():
                 print(k,v)
+            '''
         elif route["datasource"] == "FAISS":
             result = vector_chain.invoke({"question": nl})
         else:

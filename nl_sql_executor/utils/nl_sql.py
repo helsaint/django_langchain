@@ -13,7 +13,7 @@ from environs import Env
 load_dotenv()
 env = Env()
 env.read_env()
-print(env.str("SQL_TABLE"))
+
 class State(TypedDict):
     question:str
     query:str

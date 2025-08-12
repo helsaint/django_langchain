@@ -52,14 +52,6 @@ llm = ChatDeepSeek(
     api_key=os.environ["DEEPSEEK_API_KEY"]
     )
 
-'''
-def create_vector_chain():
-    graph_builder = StateGraph(State).add_sequence([retrieve, generate])
-    graph_builder.add_edge(START, "retrieve")
-    graph = graph_builder.compile()
-    return graph
-'''
-
 graph_builder = StateGraph(State).add_sequence([retrieve, generate])
 graph_builder.add_edge(START, "retrieve")
 vector_chain = graph_builder.compile()
