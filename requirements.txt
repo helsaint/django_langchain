@@ -1,3 +1,5 @@
+torch==1.13.1+cpu
+sentence-transformers==5.0.0
 aiohappyeyeballs==2.6.1
 aiohttp==3.12.14
 aiosignal==1.4.0
